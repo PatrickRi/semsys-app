@@ -1,0 +1,1 @@
+export const SPARQL_ENDPOINT = "https://NINAS-ENDPOINT/SPARQL";

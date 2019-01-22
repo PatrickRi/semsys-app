@@ -1,0 +1,51 @@
+.textarea {
+  background: lightgray;
+}
+
+.form-control {
+  background: lightgray;
+}
+
+.form-control:focus {
+  background: lightgray;
+}
+
+.form-control:disabled {
+  background: lightgray;
+}
+
+.editor-container {
+  margin: 20px 50px;
+}
+
+.btn {
+  width: 100px;
+  margin-left: 10px;
+}
+
+.error {
+  background-color: #f0808096;
+  padding: 5px;
+  border-radius: 8px;
+  transition: .1s background-color,.1s border-color,.1s color,.1s fill;
+  display: inline-block;
+  position: relative;
+  font-size: 25px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: bottom;
+  white-space: pre-wrap;
+  border: 2px solid red;
+  color: white;
+  margin-top: 30px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.instructions {
+  font-size: 0.8rem;
+  color: darkgrey;
+  padding-bottom: 10px;
+}
