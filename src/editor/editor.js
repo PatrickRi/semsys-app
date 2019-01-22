@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Button, ButtonToolbar, Form} from 'react-bootstrap';
 import './editor.scss';
 import query from '../sparql/sparql_service';
@@ -9,7 +10,7 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
+      query: this.props.query,
       result: '',
       endpoint: undefined,
       hasError: false,
@@ -58,8 +59,10 @@ class Editor extends Component {
   render() {
     return (
       <div className="editor-container">
-        <h2>SPARQL Query Editor</h2>
-        <div className="instructions">Just enter your query, maybe change the endpoint and hit Submit!</div>
+        <h2>{this.props.header}</h2>
+        <div className="instructions" style={{
+          visibility: this.props.instructions ?  'visible': 'hidden'
+        }}>{this.props.instructions ? this.props.instructions : 'placeholder'}</div>
         {this.state.hasError &&
         <div className="error" onClick={() => this.setState({hasError: false, error: undefined,})}>
           {this.state.error}
@@ -67,23 +70,28 @@ class Editor extends Component {
         <Form>
           <Form.Group controlId="sparqlEndpoint">
             <Form.Label>SPARQL Endpoint</Form.Label>
-            <Form.Control type="text" placeholder={constants.SPARQL_ENDPOINT} onChange={this.handleEndpointChange}/>
+            <Form.Control type="text" placeholder={constants.SPARQL_ENDPOINT} onChange={this.handleEndpointChange}
+                          disabled={!this.props.endpointEnabled}/>
           </Form.Group>
           <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label>Query</Form.Label>
-            <Form.Control className="textarea expandable" as="textarea" rows="5" value={this.state.query}
-                          onChange={this.handleChange}/>
+            <Form.Control className="textarea expandable" as="textarea" rows="3" value={this.state.query}
+                          onChange={this.handleChange} disabled={!this.props.queryEnabled}/>
           </Form.Group>
+
           <ButtonToolbar>
             <Button variant="secondary" type="submit" onClick={this.handleSubmit} disabled={!this.state.query}>
               Submit
             </Button>
+            {this.props.showClear &&
             <Button variant="secondary" type="button" onClick={() => {
               this.setState({query: ''})
             }}>
               Clear
             </Button>
+            }
           </ButtonToolbar>
+
         </Form>
         <Form.Label>Output</Form.Label>
         <Form.Control className="textarea" as="textarea" rows="5" value={this.state.result} disabled
@@ -92,5 +100,23 @@ class Editor extends Component {
     );
   }
 }
+
+Editor.defaultProps = {
+  showClear: true,
+  endpointEnabled: true,
+  queryEnabled: true,
+  query: '',
+  header: '',
+  instructions: '',
+};
+
+Editor.propTypes = {
+  showClear: PropTypes.bool,
+  endpointEnabled: PropTypes.bool,
+  queryEnabled: PropTypes.bool,
+  query: PropTypes.string,
+  header: PropTypes.string,
+  instructions: PropTypes.string,
+};
 
 export default Editor;

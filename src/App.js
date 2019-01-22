@@ -5,8 +5,7 @@ import {Route, Switch} from "react-router-dom";
 import Sparql1 from "./tabs/sparql1";
 import Sparql2 from "./tabs/sparql2";
 import Home from "./Home";
-import Editor from "./tabs/editor";
-import 'react-toastify/dist/ReactToastify.css';
+import GenericEditor from "./tabs/GenericEditor";
 
 class App extends Component {
 
@@ -27,7 +26,7 @@ function Main() {
         <Route exact path='/' component={Home}/>
         <Route exact path='/sparql1' component={Sparql1}/>
         <Route exact path='/sparql2' component={Sparql2}/>
-        <Route exact path='/editor' component={Editor}/>
+        <Route exact path='/editor' component={GenericEditor}/>
       </Switch>
     </main>
   )

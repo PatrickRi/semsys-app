@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './tabstyle.scss';
+import Editor from "../editor/editor";
 
 class Sparql1 extends Component {
 
@@ -10,7 +11,8 @@ class Sparql1 extends Component {
   render() {
     return (
       <div>
-        ONE
+        <Editor header="PLACEHOLDER 1"
+                query="Your fancy query" showClear={false} queryEnabled={false} endpointEnabled={false}/>
       </div>
     );
   }
