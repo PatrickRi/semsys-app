@@ -4,6 +4,7 @@ import {Button, ButtonToolbar, Form} from 'react-bootstrap';
 import './editor.scss';
 import query from '../sparql/sparql_service';
 import * as constants from '../sparql/sparql_utils';
+import OutputTable from "./OutputTable";
 
 class Editor extends Component {
 
@@ -45,6 +46,10 @@ class Editor extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({query: nextProps.query});
+  }
+
   handleEndpointChange(event) {
     this.setState({
       endpoint: event.target.value
@@ -61,7 +66,7 @@ class Editor extends Component {
       <div className="editor-container">
         <h2>{this.props.header}</h2>
         <div className="instructions" style={{
-          visibility: this.props.instructions ?  'visible': 'hidden'
+          visibility: this.props.instructions ? 'visible' : 'hidden'
         }}>{this.props.instructions ? this.props.instructions : 'placeholder'}</div>
         {this.state.hasError &&
         <div className="error" onClick={() => this.setState({hasError: false, error: undefined,})}>
@@ -75,7 +80,7 @@ class Editor extends Component {
           </Form.Group>
           <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label>Query</Form.Label>
-            <Form.Control className="textarea expandable" as="textarea" rows="3" value={this.state.query}
+            <Form.Control className="textarea expandable" as="textarea" rows="4" spellCheck="false" value={this.state.query}
                           onChange={this.handleChange} disabled={!this.props.queryEnabled}/>
           </Form.Group>
 
@@ -93,9 +98,7 @@ class Editor extends Component {
           </ButtonToolbar>
 
         </Form>
-        <Form.Label>Output</Form.Label>
-        <Form.Control className="textarea" as="textarea" rows="5" value={this.state.result} disabled
-                      ref={this.outputArea}/>
+        {this.state.result && <OutputTable payload={this.state.result}/>}
       </div>
     );
   }

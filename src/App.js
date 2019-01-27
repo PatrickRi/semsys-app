@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import './App.scss';
 import NavBar from "./navigation/NavBar";
 import {Route, Switch} from "react-router-dom";
-import Sparql1 from "./tabs/sparql1";
-import Sparql2 from "./tabs/sparql2";
+import QueryEditor from "./tabs/QueryEditor";
 import Home from "./Home";
 import GenericEditor from "./tabs/GenericEditor";
 
@@ -24,8 +23,7 @@ function Main() {
     <main>
       <Switch>
         <Route exact path='/' component={Home}/>
-        <Route exact path='/sparql1' component={Sparql1}/>
-        <Route exact path='/sparql2' component={Sparql2}/>
+        <Route exact path='/queries' component={QueryEditor}/>
         <Route exact path='/editor' component={GenericEditor}/>
       </Switch>
     </main>

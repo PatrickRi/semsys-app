@@ -3,28 +3,28 @@
 
   &-logo {
     animation: app-logo-spin infinite 15s linear;
-    height: 60px;
+    height: 80px;
   }
 
   &-logo-right {
     animation: app-logo-spin-inverse infinite 15s linear;
-    height: 60px;
+    height: 80px;
   }
 
   &-header {
-    height: 50px;
+    height: 70px;
     padding: 20px;
     color: white;
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 200px;
   }
 
   &-title {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 0.2em;
-    font-size: 2.0em;
+    font-size: 3.0em;
   }
 
   .flex {

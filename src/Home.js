@@ -8,7 +8,7 @@ export default function Home() {
       <div className="App">
         <header className="app-header">
           <img src={logo} className="app-logo" alt="logo"/>
-          <h1 className="app-title">Our fancy semantic SPARQL UI</h1>
+          <h1 className="app-title">Our fancy SPARQL UI</h1>
           <img src={logo} className="app-logo-right" alt="logo"/>
         </header>
       </div>
