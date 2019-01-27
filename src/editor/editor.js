@@ -15,10 +15,12 @@ class Editor extends Component {
       result: '',
       endpoint: undefined,
       hasError: false,
-      error: undefined
+      error: undefined,
+      isLoading: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleEndpointChange = this.handleEndpointChange.bind(this);
     this.resize = this.resize.bind(this);
     this.outputArea = React.createRef();
   }
@@ -26,16 +28,22 @@ class Editor extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const sparqlEndpoint = this.state.endpoint ? this.state.endpoint : constants.SPARQL_ENDPOINT;
+    this.setState({
+      result: '',
+      isLoading: true
+    });
     query(this.state.query, sparqlEndpoint)
       .then(result => {
         this.setState({
-          result: result.data
+          result: result.data,
+          isLoading: false,
         });
       }).catch(err => {
       this.setState({
         hasError: true,
         error: err.message,
-        result: ''
+        result: '',
+        isLoading: false,
       });
     });
   }
@@ -98,6 +106,7 @@ class Editor extends Component {
           </ButtonToolbar>
 
         </Form>
+        {this.state.isLoading && <div className="loading"></div>}
         {this.state.result && <OutputTable payload={this.state.result}/>}
       </div>
     );

@@ -11,15 +11,14 @@ export const queries = {
     PREFIX mo: <http://purl.org/ontology/mo/>
     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
     
-    SELECT ?label (count(?label)-1 as ?Anzahl)
+    SELECT ?label (count(?label) as ?Anzahl)
     WHERE {
         ?us a foaf:Person.
         ?friend a foaf:Person;
         g11:knows ?us.
         ?us foaf:name ?label.
     }
-    group by ?label
-    `
+    group by ?label`
   },
   known_by_two: {
     label: "What people are known by at least two group members?",
@@ -36,8 +35,7 @@ export const queries = {
         ?friend a foaf:Person;
         g11:knows ?friendKnows.
     } group by ?friend
-    having (count(?friendKnows)>1)
-    `
+    having (count(?friendKnows)>1)`
   },
   most_liked_genre: {
     label: "What music genre do team members like most?",
@@ -49,7 +47,7 @@ export const queries = {
     PREFIX mo: <http://purl.org/ontology/mo/>
     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
     
-    SELECT ?genre (count(?genre) as ?Anzahl)
+    SELECT ?name ?genre (count(?genre) as ?Anzahl)
     WHERE {
       ?us a foaf:Person.
       ?us foaf:name ?name.
@@ -57,13 +55,13 @@ export const queries = {
           ?us g11:likes ?musicArtist.
           ?musicArtist mo:genre ?genre.
           filter(?us=?uss)
-    {
-          select ?uss{
-              ?friend a foaf:Person;
-              g11:knows ?uss .
-          } group by ?uss
+         {
+              select ?uss{
+                  ?friend a foaf:Person;
+                  g11:knows ?uss .
+              } group by ?uss
           }
-      }group by ?genre ORDER BY DESC(?Anzahl)
+    }group by ?name ?genre order by desc(?Anzahl)
     `
   },
   artists_liked_by_team: {

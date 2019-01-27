@@ -36,7 +36,7 @@ class QueryEditor extends Component {
           </Form>
         </div>
         <Editor header={this.state.query_label}
-                query={this.state.query_string} showClear={false} queryEnabled={false} endpointEnabled={false}/>
+                query={this.state.query_string} showClear={false} queryEnabled={false} endpointEnabled={true}/>
       </div>
     );
   }
